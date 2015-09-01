@@ -27,6 +27,15 @@ namespace ModernWebStore.Api.Controllers
 
         [HttpGet]
         //[Authorize]
+        [Route("api/products/{id}")]
+        public Task<HttpResponseMessage> Get(int id)
+        {
+            var product = _service.Get(id);
+            return CreateResponse(HttpStatusCode.Created, product);
+        }
+
+        [HttpGet]
+        //[Authorize]
         [Route("api/products/{skip:int:min(0)}/{take:int:min(1)}")]
         public Task<HttpResponseMessage> GetByRange(int skip, int take)
         {
